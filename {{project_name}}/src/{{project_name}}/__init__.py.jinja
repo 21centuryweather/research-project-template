@@ -1,0 +1,8 @@
+__name__ = "{{project_name}}"
+
+{% if create_example_module %}
+__all__  = ["add_numbers"]
+__doc__  = '''Example project for demonstrating python '''
+
+from sample_fun import add_numbers
+{% endif %}

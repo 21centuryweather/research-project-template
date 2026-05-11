@@ -2,10 +2,15 @@
 project_name:
     type: str
     help: What is your project name?
+    validator: >-
+        {% if not (project_name | regex_search('^[a-zA-Z][a-zA-Z0-9_-]+$')) %}
+        Must use a lowercase letter followed by one or more of (a-z, 0-9, _, -).
+        {% endif %}
 
 project_description:
     type: str
     help: Short description of your project.
+    default: ""
 
 home_directory:
     type: bool
@@ -20,16 +25,51 @@ git:
     type: bool
     default: true
     help: Do you want to initialize a git repository for this project?
+    default: yes
+    choices:
+        yes: yes
+        no: no
+        
+create_example_module:
+    help: Do you want to create some example module code?
+    type: bool
+    default: yes
+    choices:
+        yes: yes
+        no: no
+
 
 _tasks:
     - command: "mkdir -p {{ _copier_conf.dst_path }}/{{project_name}}/data/raw &&
                 touch {{ _copier_conf.dst_path }}/{{project_name}}//data/raw/DO_NOT_EDIT &&
                 mkdir -p {{ _copier_conf.dst_path }}/{{project_name}}//data/processed"
-      when: "{{ home_directory }}"
+      when: "{{ not home_directory }}"
     - command: "mkdir -p /g/data/{{nci_project}}/$USER/{{project_name}}/data/raw &&
                 touch /g/data/{{nci_project}}/$USER/{{project_name}}/data/raw/DO_NOT_EDIT &&
                 mkdir -p /g/data/{{nci_project}}/$USER/{{project_name}}/data/processed &&
                 ln -s /g/data/{{nci_project}}/$USER/{{project_name}}/data {{ _copier_conf.dst_path }}/{{project_name}}/"
       when: "{{ home_directory }}"
-    - command: git init {{ _copier_conf.dst_path }}/{{project_name}}
+    - command: cd {{ _copier_conf.dst_path }}/{{project_name}} && git init --initial-branch=main &&
+               git add . &&
+               git commit -m 'Start project based on project template'
       when: "{{ git }}" 
+
+_message_after_copy: |
+    Your project "{{ project_name }}" has been created successfully!
+
+    There are a few more manual steps to finish the setup.
+
+    Go to your project directory and complete the .envrc file with the modules and configuration you need for your project. 
+       $ cd {{ _copier_conf.dst_path }}
+       $ vim .envrc
+       $ direnv allow
+    To use this tool you need to have direnv installed and configured. See TODO for more information.
+
+
+
+    {%- if git  %}
+
+    Push your project to a new repository on GitHub:
+       $ git remote add origin git@github.com:<you username>/{{project_name}}.git
+       $ git push -u origin main
+    {%- endif %}
