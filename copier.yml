@@ -20,6 +20,7 @@ home_directory:
 nci_project:
     type: str
     help: In which NCI project would you like to store big data files?
+    when : "{{ home_directory }}"
 
 git:
     type: bool
