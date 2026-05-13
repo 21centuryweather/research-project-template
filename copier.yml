@@ -79,7 +79,7 @@ _message_after_copy: |
     requirements.txt file for how to do this.
 
 # Subdirectory that contain the template
-_subdirectory: {{ project_name }}
+_subdirectory: "{{ project_name }}"
 
 # Require that the user has at least Copier v9.1.0 installed
 _min_copier_version: "9.15.0"
