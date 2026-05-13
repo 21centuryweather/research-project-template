@@ -19,6 +19,7 @@ home_directory:
 
 nci_project:
     type: str
+    default: $PROJECT
     help: In which NCI project would you like to store big data files?
     when : "{{ home_directory }}"
 
@@ -56,6 +57,7 @@ _tasks:
       when: "{{ git }}" 
 
 _message_after_copy: |
+    ======================================================================
     Your project "{{ project_name }}" has been created successfully!
 
     There are a few more manual steps to finish the setup.
@@ -66,10 +68,7 @@ _message_after_copy: |
        $ direnv allow
     To use this tool you need to have direnv installed and configured. See TODO for more information.
 
-
-
     {%- if git  %}
-
     Push your project to a new repository on GitHub:
        $ git remote add origin git@github.com:<you username>/{{project_name}}.git
        $ git push -u origin main
