@@ -21,7 +21,32 @@ module load copier
 copier copy --trust gb:21centuryweather/research-project-template
 ```
 
-And answer the questions. 
+And answer the questions. Depending on the answers, the project will look something like this:
+
+```bash
+{{project_name}}/
+├── analysis
+│   ├── example.ipynb
+│   └── figures
+│       └── .figures
+├── .copier-answers.yml
+├── data -> /g/data/{{nci_project}}/$USER/{{project_name}}/data
+│   ├── processed
+│   └── raw
+│       └── DO_NOT_EDIT
+├── .envrc
+├── .git
+├── .gitignore
+├── README.md
+├── requirements.txt
+├── src
+│   └── {{project_name}}
+│       ├── __init__.py
+│       └── sample_fun.py
+└── tests
+    └── {{project_name}}
+        └── test_sample_fun.py
+```
 
 ### Locally on your machine
 
