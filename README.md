@@ -18,7 +18,7 @@ module load copier
 2. Copy the template:
 
 ```bash
-copier copy --trust gb:21centuryweather/research-project-template
+copier copy --trust gh:21centuryweather/research-project-template .
 ```
 
 And answer the questions. Depending on the answers, the project will look something like this:
