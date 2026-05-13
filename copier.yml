@@ -60,10 +60,10 @@ _message_after_copy: |
     ======================================================================
     Your project "{{ project_name }}" has been created successfully!
 
-    There are a few more manual steps to finish the setup.
+    There are a few more manual (but optional!) steps to finish the setup.
 
     Go to your project directory and complete the .envrc file with the modules and configuration you need for your project. 
-       $ cd {{ _copier_conf.dst_path }}
+       $ cd {{ _copier_conf.dst_path }}/{{project_name}}
        $ vim .envrc
        $ direnv allow
     To use this tool you need to have direnv installed and configured. 
