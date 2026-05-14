@@ -3,8 +3,8 @@ project_name:
     type: str
     help: What is your project name?
     validator: >-
-        {% if not (project_name | regex_search('^[a-zA-Z][a-zA-Z0-9_-]+$')) %}
-        Must use a lowercase letter followed by one or more of (a-z, 0-9, _, -).
+        {% if not (project_name | regex_search('[a-zA-Z_-]')) %}
+        Must use a lowercase or upper case letter, numbers, - or _. No Spaces allowed.
         {% endif %}
 
 project_description:
@@ -20,7 +20,8 @@ home_directory:
 nci_project:
     type: str
     default: $PROJECT
-    help: In which NCI project would you like to store big data files?
+    help: In which NCI project would you like to store big data files? (a {{project_name}}/data folder will be created
+          in gdata and it will be linked in your project directory)
     when : "{{ home_directory }}"
 
 git:
