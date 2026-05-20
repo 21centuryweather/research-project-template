@@ -33,7 +33,8 @@ And answer the questions. Depending on the answers, the project will look someth
 ├── data -> /g/data/{{nci_project}}/$USER/{{project_name}}/data
 │   ├── processed
 │   └── raw
-│       └── DO_NOT_EDIT
+│   │   └── DO_NOT_EDIT
+│   └── temp -> -> /scratch/{{nci_project}}/$USER/{{project_name}}/data/temp
 ├── .envrc
 ├── .git
 ├── .gitignore
