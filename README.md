@@ -32,20 +32,18 @@ And answer the questions. Depending on the answers, the project will look someth
 ├── .copier-answers.yml
 ├── data -> /g/data/{{nci_project}}/$USER/{{project_name}}/data
 │   ├── processed
-│   └── raw
-│       └── DO_NOT_EDIT
+│   │   └── DO_NOT_EDIT
+│   └── temp -> /scratch/{{nci_project}}/$USER/{{project_name}}/data/temp
 ├── .envrc
 ├── .git
 ├── .gitignore
 ├── README.md
 ├── requirements.txt
 ├── src
-│   └── {{project_name}}
-│       ├── __init__.py
-│       └── sample_fun.py
+│   ├── __init__.py
+│   └── sample_fun.py
 └── tests
-    └── {{project_name}}
-        └── test_sample_fun.py
+    └── test_sample_fun.py
 ```
 
 ### Locally on your machine
