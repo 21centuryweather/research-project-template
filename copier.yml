@@ -82,7 +82,7 @@ _message_after_copy: |
        $ vim .envrc
        $ direnv allow
     To use this tool you need to have direnv installed and configured. 
-    See https://21centuryweather.github.io/21st-Century-Weather-Software-Wiki/gadi/mdirenv.html for more information.
+    See https://21centuryweather.github.io/21st-Century-Weather-Software-Wiki/gadi/direnv.html for more information.
     {%- endif %}
 
     {%- if git  %}
