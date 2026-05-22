@@ -45,8 +45,8 @@ envrc:
 language:
     help: Which language will this project use? 
     choices:
-        R: r
         python: python
+        R: r
 
 create_example_module:
     help: Do you want to create some example module code?
@@ -84,7 +84,7 @@ _tasks:
       when: "{{ git }}" 
     - command: "cd {{ _copier_conf.dst_path }}/{{project_name}} &&
                 Rscript -e 'if (!requireNamespace(\"renv\", quietly = TRUE)) install.packages(\"renv\"); renv::init()'"
-      when: "{{ renv }}"
+      when: "{{ renv and language == 'r' }}"
 
 _message_after_copy: |
     ======================================================================
