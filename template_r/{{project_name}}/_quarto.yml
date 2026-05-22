@@ -1,0 +1,5 @@
+project:
+  execute-dir: project
+
+execute:
+  freeze: auto

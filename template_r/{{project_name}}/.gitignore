@@ -47,3 +47,5 @@ data/
 
 # Ignore .envrc because it most likely has gadi-specific code
 .envrc
+/.quarto/
+**/*.quarto_ipynb
