@@ -42,33 +42,49 @@ envrc:
         yes: yes
         no: no
 
+language:
+    help: Which language will this project use? 
+    choices:
+        R: r
+        python: python
+
 create_example_module:
     help: Do you want to create some example module code?
     type: bool
     default: yes
+    when: "{{ language == 'python'}}"
     choices:
         yes: yes
         no: no
 
+renv:
+    help: Do you want to use renv in this project?
+    type: bool
+    default: yes
+    when: "{{ language == 'r'}}"
+    choices:
+        yes: yes
+        no: no
 
 _tasks:
     - command: "mkdir -p {{ _copier_conf.dst_path }}/{{project_name}}/data/raw &&
                 touch {{ _copier_conf.dst_path }}/{{project_name}}//data/raw/DO_NOT_EDIT &&
-                mkdir -p {{ _copier_conf.dst_path }}/{{project_name}}//data/processed &&
-                mkdir -p /scratch/{{nci_project}}/$USER/{{project_name}}/data/temp &&
-                ln -s /scratch/{{nci_project}}/$USER/{{project_name}}/data/temp {{ _copier_conf.dst_path }}/{{project_name}}/data/"
+                mkdir -p {{ _copier_conf.dst_path }}/{{project_name}}//data/processed"
       when: "{{ not home_directory }}"
     - command: "mkdir -p /g/data/{{nci_project}}/$USER/{{project_name}}/data/raw &&
                 touch /g/data/{{nci_project}}/$USER/{{project_name}}/data/raw/DO_NOT_EDIT &&
                 mkdir -p /g/data/{{nci_project}}/$USER/{{project_name}}/data/processed &&
-                ln -s /g/data/{{nci_project}}/$USER/{{project_name}}/data {{ _copier_conf.dst_path }}/{{project_name}}/ &&
-                mkdir -p /scratch/{{nci_project}}/$USER/{{project_name}}/data/temp &&
-                ln -s /scratch/{{nci_project}}/$USER/{{project_name}}/data/temp {{ _copier_conf.dst_path }}/{{project_name}}/data/"
+                ln -s /g/data/{{nci_project}}/$USER/{{project_name}}/data {{ _copier_conf.dst_path }}/{{project_name}}/"
       when: "{{ home_directory }}"
+    - command: "mkdir -p /scratch/{{nci_project}}/$USER/{{project_name}}/data/temp &&
+                ln -s /scratch/{{nci_project}}/$USER/{{project_name}}/data/temp {{ _copier_conf.dst_path }}/{{project_name}}/data/"
     - command: cd {{ _copier_conf.dst_path }}/{{project_name}} && git init --initial-branch=main &&
                git add . &&
                git commit -m 'Start project based on project template'
       when: "{{ git }}" 
+    - command: "cd {{ _copier_conf.dst_path }}/{{project_name}} &&
+                Rscript -e 'if (!requireNamespace(\"renv\", quietly = TRUE)) install.packages(\"renv\"); renv::init()'"
+      when: "{{ renv }}"
 
 _message_after_copy: |
     ======================================================================
@@ -95,7 +111,7 @@ _message_after_copy: |
     requirements.txt file for how to do this.
 
 # Subdirectory that contain the template
-_subdirectory: template_python
+_subdirectory: "template_{{ language }}"
 
 # Require that the user has at least Copier v9.1.0 installed
 _min_copier_version: "9.15.0"
