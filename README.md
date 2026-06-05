@@ -31,7 +31,8 @@ And answer the questions. Depending on the answers, the project using Python wil
 │       └── .figures
 ├── .copier-answers.yml
 ├── data -> /g/data/{{nci_project}}/$USER/{{project_name}}/data
-│   ├── processed
+│   ├── processed
+│   ├── raw
 │   │   └── DO_NOT_EDIT
 │   └── temp -> /scratch/{{nci_project}}/$USER/{{project_name}}/data/temp
 ├── .envrc
