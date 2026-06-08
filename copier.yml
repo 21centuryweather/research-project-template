@@ -69,11 +69,11 @@ renv:
 _tasks:
     - command: "mkdir -p {{ _copier_conf.dst_path }}/{{project_name}}/data/raw &&
                 touch {{ _copier_conf.dst_path }}/{{project_name}}//data/raw/DO_NOT_EDIT &&
-                mkdir -p {{ _copier_conf.dst_path }}/{{project_name}}//data/processed"
+                mkdir -p {{ _copier_conf.dst_path }}/{{project_name}}//data/derived"
       when: "{{ not home_directory }}"
     - command: "mkdir -p /g/data/{{nci_project}}/$USER/{{project_name}}/data/raw &&
                 touch /g/data/{{nci_project}}/$USER/{{project_name}}/data/raw/DO_NOT_EDIT &&
-                mkdir -p /g/data/{{nci_project}}/$USER/{{project_name}}/data/processed &&
+                mkdir -p /g/data/{{nci_project}}/$USER/{{project_name}}/data/derived &&
                 ln -s /g/data/{{nci_project}}/$USER/{{project_name}}/data {{ _copier_conf.dst_path }}/{{project_name}}/"
       when: "{{ home_directory }}"
     - command: "mkdir -p /scratch/{{nci_project}}/$USER/{{project_name}}/data/temp &&
