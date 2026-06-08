@@ -16,8 +16,7 @@
    "outputs": [],
    "source": [
     "import sys\n",
-    "sys.path.append('../src/{{project_name}}')\n",
-    "from sample_fun import add_numbers"
+    "from src.sample_fun import add_numbers"
    ]
   },
   {
@@ -60,7 +59,7 @@
     "import xarray as xr\n",
     "\n",
     "# Open NetCDF file\n",
-    "ds = xr.open_dataset(\"../data/derived/example.nc\")\n",
+    "ds = xr.open_dataset(\"data/derived/example.nc\")\n",
     "```"
    ]
   }
