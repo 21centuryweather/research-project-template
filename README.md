@@ -28,7 +28,6 @@ And answer the questions. Depending on the answers, the project using Python wil
 ├── analysis
 │   ├── example.ipynb
 │   └── figures
-│       └── .figures
 ├── .copier-answers.yml
 ├── data -> /g/data/{{nci_project}}/$USER/{{project_name}}/data
 │   ├── derived
@@ -40,6 +39,7 @@ And answer the questions. Depending on the answers, the project using Python wil
 ├── .gitignore
 ├── README.md
 ├── requirements.txt
+├── scripts/
 ├── src
 │   ├── __init__.py
 │   └── sample_fun.py
